@@ -16,7 +16,11 @@ $.ajaxPrefilter(function(option) {
         var res = xhr.responseJSON;
         if (res && res.status === 1 && res.message === '身份认证失败！') {
             localStorage.removeItem('token');
-            location.href = './login.html';
+            if (Location.pathname === '/index.html') {
+                location.href = './login.html';
+            } else {
+                window.parent.location.href = '../login.html';
+            }
         }
         // 其他错误
         if (res && res.status === 1) {
